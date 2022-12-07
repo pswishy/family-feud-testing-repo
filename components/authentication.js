@@ -16,13 +16,14 @@ if (typeof document !== "undefined"){
     // document exist
     document.getElementById("google").onclick = function(){
         GoogleFireBaseLogin();
+    }
     document.getElementById("twitter").onclick = function(){
         TwitterFireBaseLogin();
+    }
     document.getElementById("facebook").onclick = function(){
         FacebookFireBaseLogin();
     }
-    }
-    };
+   
 }
 
 function GoogleFireBaseLogin(){
@@ -66,7 +67,11 @@ function GoogleFireBaseLogin(){
 }
 
 function TwitterFireBaseLogin(){
-    
+
+}
+
+function FacebookFireBaseLogin(){
+
 }
 
 export default function AuthenticationLogin(props) {
