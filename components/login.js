@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import TitleLogo from "../components/title-logo";
 import LanguageSwitcher from "../components/language";
+import AuthenticationLogin from "../components/authentication";
 import { useTranslation } from "react-i18next";
 import "../i18n/i18n";
 
@@ -10,6 +11,9 @@ export default function Login(props) {
     <>
       <div class="self-end">
         <LanguageSwitcher />
+      </div>
+      <div class = "self-end">
+        <AuthenticationLogin />
       </div>
       <TitleLogo insert="" />
       <div class="flex flex-col">
