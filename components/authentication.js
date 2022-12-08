@@ -1,6 +1,6 @@
 import React from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"; // may have to change to node_modules/firebase
+import { getAuth, GoogleAuthProvider, TwitterAuthProvider, signInWithPopup, signOut } from "firebase/auth"; // may have to change to node_modules/firebase
 
 const firebaseConfig = {
     apiKey: "AIzaSyBQuRJ9w1eaRVpeXGGemAxEYavIOf5mziY",
@@ -67,7 +67,40 @@ function GoogleFireBaseLogin(){
 }
 
 function TwitterFireBaseLogin(){
+    const app = initializeApp(firebaseConfig);
+    const provider = new TwitterAuthProvider();
+    const auth = getAuth(app);
 
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+      // You can use these server side with your app's credentials to access the Twitter API.
+      const credential = TwitterAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const secret = credential.secret;
+  
+      // The signed-in user info.
+      const user = result.user;
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = TwitterAuthProvider.credentialFromError(error);
+      // ...
+    });
+    
+    signOut.addEventListener('click',(e) =>{
+        signOut(auth).then(()=>{
+            // sign out successful
+            }).catch((error)=>{
+                // error occured
+            });
+
+    });
 }
 
 function FacebookFireBaseLogin(){
