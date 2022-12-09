@@ -55,7 +55,7 @@ function GoogleFireBaseLogin(){
                 // ...
                 alert(errorMessage);
             });
-
+/*
             signOut.addEventListener('click',(e) =>{
                 signOut(auth).then(()=>{
                     // sign out successful
@@ -64,6 +64,7 @@ function GoogleFireBaseLogin(){
                     });
   
             });
+*/
 }
 
 function TwitterFireBaseLogin(){
@@ -92,7 +93,7 @@ function TwitterFireBaseLogin(){
       const credential = TwitterAuthProvider.credentialFromError(error);
       // ...
     });
-    
+    /*
     signOut.addEventListener('click',(e) =>{
         signOut(auth).then(()=>{
             // sign out successful
@@ -101,7 +102,8 @@ function TwitterFireBaseLogin(){
             });
 
     });
-}
+    */
+};
 
 function FacebookFireBaseLogin(){
 
