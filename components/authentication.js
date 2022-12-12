@@ -168,9 +168,10 @@ export default function AuthenticationLogin(props) {
             </button>
 
             <button id = "facebook" style={{marginLeft: "5px"}}>
-                <svg width="24px" height="24px" viewBox="0 0 455.73 455.73" xmlns="http://www.w3.org/2000/svg" enable-background = "new 0 0 455.73 455.73">
-                <path fill = "#3A559F" d="M0,0v455.73h242.704V279.691h-59.33v-71.864h59.33v-60.353c0-43.893,35.582-79.475,79.475-79.475
-                    h62.025v64.622h-44.382c-13.947,0-25.254,11.307-25.254,25.254v49.953h68.521l-9.47,71.864h-59.051V455.73H455.73V0H0z"/>
+                <svg width="24px" height="24px" viewBox="0 0 455.73 455.73" xmlns="http://www.w3.org/2000/svg" enable-background = "new 0 0 455 455">
+                    <path fill-rule = "evenodd" clip-rule = "evenodd" d="M0,0v455h455V0H0z M301.004,125.217H265.44
+                        c-7.044,0-14.153,7.28-14.153,12.696v36.264h49.647c-1.999,27.807-6.103,53.235-6.103,53.235h-43.798V385h-65.266V227.395h-31.771
+                        v-53.029h31.771v-43.356c0-7.928-1.606-61.009,66.872-61.009h48.366V125.217z"/>
                 </svg>  
             </button>
       </div>
