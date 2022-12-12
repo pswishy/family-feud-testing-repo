@@ -1,6 +1,6 @@
 import React from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, TwitterAuthProvider, FacebookAuthProvider, signInWithPopup, signOut } from "firebase/auth"; // may have to change to node_modules/firebase
+import { getAuth, GoogleAuthProvider, TwitterAuthProvider, FacebookAuthProvider, signInWithPopup, signOut, FirebaseAuth } from "firebase/auth"; // may have to change to node_modules/firebase
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 
 
@@ -14,11 +14,16 @@ const firebaseConfig = {
     measurementId: "G-ZCRBSPX0PP"
 };
 
+var userGooglelogin = false;
+var userTwitterlogin = false;
+var userFacebooklogin = false;
+
 if (typeof document !== "undefined"){
     // document exist
     document.getElementById("google").onclick = function(){
         GoogleFireBaseLogin();
     }
+    
     document.getElementById("twitter").onclick = function(){
         TwitterFireBaseLogin();
     }
@@ -30,6 +35,10 @@ if (typeof document !== "undefined"){
 
 function GoogleFireBaseLogin(){
 
+    if (userGooglelogin == true){
+        GoogleSignOut();
+        return;
+    }
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider(app);
@@ -42,22 +51,29 @@ function GoogleFireBaseLogin(){
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
-            alert(user.displayName);
-                           
-                            // ...
+            alert(user.displayName);     
             });
+    userGooglelogin = true;
+    
+}
 
-    signOut.addEventListener('click',(e) =>{
-        signOut(auth).then(()=>{
-            // sign out successful
-         }).catch((error)=>{
-                        // error occured
-            });
-  
-    });
+function GoogleSignOut(){
+    const auth = getAuth();
+    signOut(auth).then(() => {
+    // Sign-out successful.
+    alert("Successfully Signed Out ");     
+    }).catch((error) => {
+    // An error happened.
+});
+    userGooglelogin = false;
+    
 }
 
 function TwitterFireBaseLogin(){
+    if (userTwitterlogin == true){
+        TwitterSignOut();
+        return;
+    }
     const app = initializeApp(firebaseConfig);
     const provider = new TwitterAuthProvider();
     const auth = getAuth(app);
@@ -75,17 +91,24 @@ function TwitterFireBaseLogin(){
       // ...
     });
 
-    signOut.addEventListener('click',(e) =>{
-        signOut(auth).then(()=>{
-            // sign out successful
-            }).catch((error)=>{
-                // error occured
-            });
+}
 
-    });
+function TwitterSignOut(){
+    const auth = getAuth();
+    signOut(auth).then(() => {
+    // Sign-out successful.
+    alert("Successfully Signed Out ");     
+    }).catch((error) => {
+    // An error happened.
+});
+    userTwitterlogin = false;
 }
 
 function FacebookFireBaseLogin(){
+    if (userFacebooklogin == true){
+        FacebookSignOut();
+        return;
+    }
     const app = initializeApp(firebaseConfig);
     const provider = new FacebookAuthProvider();
     const auth = getAuth(app);
@@ -102,16 +125,17 @@ function FacebookFireBaseLogin(){
       const user = result.user;
       // ...
     });
+}
 
-    signOut.addEventListener('click',(e) =>{
-        signOut(auth).then(()=>{
-            // sign out successful
-            }).catch((error)=>{
-                // error occured
-            });
-
-    });
-
+function FacebookSignOut(){
+    const auth = getAuth();
+    signOut(auth).then(() => {
+    // Sign-out successful.
+    alert("Successfully Signed Out ");     
+    }).catch((error) => {
+    // An error happened.
+});
+    userFacebooklogin = false;  
 }
 
 export default function AuthenticationLogin(props) {

@@ -22,3 +22,8 @@
   font-style: bold;
   font-display: swap;
 }
+body {
+  background-color: #0a5ecd;
+  align-items: center;
+  justify-content: center;
+}
