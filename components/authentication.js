@@ -1,6 +1,6 @@
 import React from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, TwitterAuthProvider, signInWithPopup, signOut } from "firebase/auth"; // may have to change to node_modules/firebase
+import { getAuth, GoogleAuthProvider, TwitterAuthProvider, FacebookAuthProvider, signInWithPopup, signOut } from "firebase/auth"; // may have to change to node_modules/firebase
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 
 
@@ -45,27 +45,16 @@ function GoogleFireBaseLogin(){
             alert(user.displayName);
                            
                             // ...
-            }).catch((error) => {
-                            
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // The email of the user's account used.
-                const email = error.customData.email;
-                // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-                alert(errorMessage);
             });
 
-            signOut.addEventListener('click',(e) =>{
-                signOut(auth).then(()=>{
-                    // sign out successful
-                    }).catch((error)=>{
+    signOut.addEventListener('click',(e) =>{
+        signOut(auth).then(()=>{
+            // sign out successful
+         }).catch((error)=>{
                         // error occured
-                    });
-  
             });
+  
+    });
 }
 
 function TwitterFireBaseLogin(){
@@ -84,17 +73,8 @@ function TwitterFireBaseLogin(){
       // The signed-in user info.
       const user = result.user;
       // ...
-    }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = TwitterAuthProvider.credentialFromError(error);
-      // ...
     });
-    
+
     signOut.addEventListener('click',(e) =>{
         signOut(auth).then(()=>{
             // sign out successful
@@ -106,12 +86,37 @@ function TwitterFireBaseLogin(){
 }
 
 function FacebookFireBaseLogin(){
+    const app = initializeApp(firebaseConfig);
+    const provider = new FacebookAuthProvider();
+    const auth = getAuth(app);
+
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+      // You can use these server side with your app's credentials to access the Twitter API.
+      const credential = TwitterAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const secret = credential.secret;
+  
+      // The signed-in user info.
+      const user = result.user;
+      // ...
+    });
+
+    signOut.addEventListener('click',(e) =>{
+        signOut(auth).then(()=>{
+            // sign out successful
+            }).catch((error)=>{
+                // error occured
+            });
+
+    });
 
 }
 
 export default function AuthenticationLogin(props) {
     return (
-        <div id="login-box"> 
+        <div id="login-box" style = {{}}> 
             <button id = "google"> 
             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path fill="#EA4335" d="M5.26620003,9.76452941 C6.19878754,6.93863203 8.85444915,4.90909091 12,4.90909091 C13.6909091,4.90909091 15.2181818,5.50909091 16.4181818,6.49090909 L19.9090909,3 C17.7818182,1.14545455 15.0545455,0 12,0 C7.27006974,0 3.1977497,2.69829785 1.23999023,6.65002441 L5.26620003,9.76452941 Z"/>
