@@ -16,7 +16,7 @@ export default function Login(props) {
         <AuthenticationLogin />
       </div>
       <TitleLogo insert="" />
-      <div class="flex flex-col">
+      <div  class="flex flex-col">
         <div class="flex flex-row justify-between text-1xl px-2">
           <p class="uppercase">{t("room code")}</p>
         </div>
@@ -49,16 +49,16 @@ export default function Login(props) {
         ></input>
       </div>
       <div class="flex flex-row items-center space-x-5">
-        <button
-          class="shadow-md flex-grow rounded-md bg-green-300 p-4 w-2/3 text-2xl uppercase"
+        <button style = {{backgroundColor: "orange"}}
+          class="shadow-md flex-grow rounded-md bg-orange-300 p-4 w-2/3 text-2xl uppercase"
           onClick={() => {
             props.joinRoom();
           }}
         >
           <div class="flex-grow">{t("play")}</div>
         </button>
-        <button
-          class="shadow-md rounded-md bg-gray-300 p-4 text-2xl uppercase"
+        
+        <button style = {{backgroundColor: "orange"}} class="shadow-md rounded-md bg-orange-300 p-4 text-2xl uppercase"
           onClick={() => {
             props.hostRoom();
           }}
